@@ -1,0 +1,65 @@
+fcfs
+#include<stdio.h> int main(){int n;printf(entre the no.of processes");scanf("%d",&n); int bt[n],wt[n],tat[n];printf("enter the b.t of process");for(i=0;i<n;i++){printf("%d=",i+1);scanf("%d",&bt[i]);}wt[0]=0;tat[0]=bt[0];float awt = 0,atat=bt[0];for(int i=1;i<n;i++){wt[i]=[i1]+bt[i-1]:tat[i]=wt[i]+bt[i];awt+=wt[i];
+atat+=tat[i];}aet=awt/n;atat=atat/n;printf("awt:%f",awt);printf("atat:%f",atat); }
+
+sjf
+
+#include<stdio.h>main(){int p[20], bt[20], wt[20], tat[20], i, k, n, temp;float wtavg, tatavg;printf("\nEnter the number of processes -- ");scanf("%d", &n);
+for(i=0;i<n;i++){p[i]=i;printf("Enter Burst Time for Process %d -- ", i);scanf("%d", &bt[i]); }for(i=0;i<n;i++)for(k=i+1;k<n;k++)if(bt[i]>bt[k]){temp=bt[i];bt[i]=bt[k];
+bt[k]=temp;temp=p[i];p[i]=p[k];p[k]=temp;}wt[0] = wtavg = 0;tat[0] = tatavg = bt[0];for(i=1;i<n;i++){wt[i] = wt[i-1] +bt[i-1];tat[i] = tat[i-1] +bt[i];wtavg = wtavg + wt[i];tatavg = tatavg + tat[i];}printf("\n\t PROCESS \tBURST TIME \t WAITING TIME\t TURNAROUND TIME\n");for(i=0;i<n;i++)printf("\n\t P%d \t\t %d \t\t %d \t\t %d", p[i], bt[i], wt[i], tat[i]);printf("\nAverage Waiting Time -- %f", wtavg/n);printf("\nAverage Turnaround Time -- %f", tatavg/n);}
+
+roundrobin
+
+# Include<stdio.h>main(){int i,j,n,bu[10],wa[10],tat[10],t,ct[10],max;float awt=0,att=0,temp=0;printf("Enter the no of processes -- ");scanf("%d",&n);for(i=0;i<n;i+){printf("\nEnter Burst Time for process %d -- ", i+1);scanf("%d",&bu[i]); ct[i]=bu[i]; }printf("\nEnter the size of time slice -- ");scanf("%d",&t); max=bu[0];for(i=1;i<n;i++)if(max<bu[i])max=bu[i];for(j=0;j<(max/t)+1;j++)for(i=0;i<n;i++)if(bu[i]!=0) if(bu[i]<=t) {tat[i]=temp+bu[i];temp=temp+bu[i];bu[i]=0; }else{bu[i]=bu[i]-t;temp=temp+t;}for(i=0;i<n;i++){wa[i]=tat[i]- ct[i];att+=tat[i];awt+=wa[i];}printf("\ nThe Ave rag e Turn around time is -- %f",att/n);printf("\nThe AverageWaiting time is -- %f ",awt/n);printf("\ n\tPROCESS\t BURST TIME \t WAITING TIME\tTURNAROUND TIME\n");for(i=0;i<n;i++) printf("\t%d \t %d \t\t %d \t\t %d\n",i+1,ct[i],wa[i],tat[i]);} 
+
+priority
+
+#include<stdio.h>main(){int p[20],bt[20],pri[20], wt[20],tat[20],i, k, n, temp;float wtavg, tatavg;printf("Enter the number of processes --- ");scanf("%d",&n); fo(i=0;i<n;i++){p[i] = i;printf("Enter the Burst Time & Priority of Process %d --- ",i);scanf("%d %d",&bt[i], &pri[i]);}for(i=0;i<n;i++)for(k=i+1;k<n;k++)if(pri[i] > pri[k]){temp=p[i];p[i]=p[k];p[k]=temp;temp=bt[i];bt[i]=bt[k];bt[k]=temp;temp=pri[i];pri[i]=pri[k];pri[k]=temp;}wtavg = wt[0] = 0;tatavg = tat[0] = bt[0];for(i=1;i<n;i++){w[i] = wt[i-1] + bt[i-1];tat[i] = tat[i-1] + bt[i];wtavg = wtavg + wt[i];tatavg = tatavg + tat[i];}printf("\nPROCESS\t\tPRIORITY\tBURST TIME\tWAITING TIM\tTURNAROUNDTIME");for(i=0;i<n;i++)printf("\n%d \t\t %d \t\t %d \t\t %d \t\t %d ",p[i],pri[i],bt[i],wt[i],tat[i]);printf("\nAverage Waiting Time is --- %f",wtavg/n);printf("\nAverage Turnaround Time is --- %f",tatavg/n);}
+
+bankers
+
+#include<stdio.h>int main(){int avail[10],alloc[10][10],max[10][10],need[10][10],maxres[10],m,n,i,j,k,sum;printf("\nEnter the number of processessand
+thenumber of resources:\n");scanf("%d%d",&n,&m);printf("\nEnter the maximum of instances of resources\n");for(j=0;j<m;j++){scanf("%d",&maxres[j]);avail[j] = maxres[j];}printf("\nEnter the allocated matrix:\n");for(i=0;i<n;i++){for(j=0;j<m;j++)scanf("%d",&alloc[i][j]);}printf("\nEnter the max matrix:\n");for(i=0;i<n;i++){for(j=0;j<m;j++){scanf("%d",&max[i][j]);need[i][j]=max[i][j]-alloc[i][j];}}printf("\nThe Need matrix is:\n");for(i=0;i<n;i++){for(j=0;j<m;j++)printf("%d",need[i[j]);
+printf("\n");}for(j=0;j<m;j++){sum=0;for(i=0;i<n;i++)sum+=alloc[i][j];avail[j]-=sum;}int finish[10],safeseq[10],ind=0;for(k=0;k<n;k++){finish[k]=0; }int y=0;for(k=0;k<n;k++) {for(i=0;i<n;i++) {if(finish[i]==0) {int flag=0;for(j=0;j<n;j++) {if(need[i][j]>avail[j]) {flag=1;break; }}if(flag==0) {safeseq[ind++]=i;for(y=0;y<m;y++)
+avail[y]=alloc[i][y];finish[i]=1;printf("i=%d\n",i);}}}}for(i=0;i<n;i++)if(finish[i]==0) {printf("system is in unsafe state.");return (0); }printf("following is the SAFE sequence\n");for(i=0;i<n;i++)printf("p%d->",safeseq[i]);printf("p%d",safeseq[n-1]);return (0);}
+
+getpid()
+
+#include<stdio.h>#include<unistd.h> int main() { int pid,idc,idp; pid==forl(); if(oid==0){printf("ima a child");idc=getpid();printf("\n the id=%d",idc);}else{printf("iam a parent");idp=getpid();printf("\n the id =%d",idp);}}
+
+fork
+
+#include<stdio.h>#include<unistd.h> int main() { int pid; pid==forl(); if(oid==0){printf("ima a child");}else{printf("iam a parent");}}
+
+wait
+
+#include<stdio.h>#include<unistd.h>#include<stdlib.h>#include<sys/wait.h>void main(){int pid; pid==forl();int status;if(oid==0){printf("ima a child");sleep(10);}else{printf("iam a parent process");printf("iam waiting for child");qaIT(&STATUS);PRINTF("CHILD EXECUTIOn completed");}}
+
+exec
+
+#include<stdio.h>#include<unistd.h>int main(){printf("iam a exec demo\n");printf("id od demo is %d\n",getpid());
+char*args[]={"/bin/ls","-l",null};execv(args[0],args);printf("coming back to execv demo");return 0;}
+
+semaphore
+
+#include<stdio.h>#include<stdlib.h>int mutex=1,full=0,empty=3,x=0;int main(){int n;void producer();void consumer();int wait(int);int signal(int);printf("\n1.Producer\n2.Consumer\n3.Exit");while(1) { printf("\nEnter your choice:");scanf("%d",&n); switch(n) { case 1:if((mutex==1)&&(empty!=0)) producer();
+ else printf("Buffer is full!!"); break; case 2:if((mutex==1)&&(full!=0)) consumer(); else printf("Buffer is empty!!"); break; case 3: exit(0); break; } } return 0;
+}int wait(int s){ return (--s);}int signal(int s){return(++s);}void producer(){mutex=wait(mutex); full=signal(full); empty=wait(empty); x++; printf("\nProducer produces the item %d",x); mutex=signal(mutex);}void consumer(){ mutex=wait(mutex); full=wait(full); empty=signal(empty); printf("\nConsumer consumes item %d",x); x--; mutex=signal(mutex);}
+
+firstfit
+
+#include<stdio.h>void main(){int bsize[10],psize[10],bno,pno,flags[10],allocation[10],i,j,k;for(i=0;i<0;i++){flags [i]=0;allocation [i]=-1;}printf("enter no of blocks:");scanf("%d",&bno);printf("\nenter size of each block:");for(i=0;i<bno;i++)scanf("%d",&bsize[i]);printf("\nenter the no of process:");scanf("%d",&pno);
+printf("\nenter the size of each process :");for(i=0;i<pno;i++)scanf("%d",&psize[i]);for(i=0;i<pno;i++)for(j=0;j<pno;j++)if (flags[j]==0&& bsize[j]>=psize[i])
+{allocation[i]=i;flags[i]=1;break;}printf("\nblock no.\tsize\tprocess no.\t\tsize");for(i=0;i<bno;i++){printf("\n%d\t\t%d\t\t",i+1,bsize[i]);if (flags[i]==1)
+printf("%d\t\t\t%d",allocation[i]+1,psize[allocation[i]]);elseprintf("not allocated");}}
+
+best fit
+
+#include<stdio.h>void main(){int fragment[20],b[20],p[20],i,j,np,nb,temp,lowest=9999;static int barray[20],parray[20];printf("\n\t\t\tmemory managment scheme - best fit");printf("\nenter the number of blocks:");scanf("%d",&nb);printf("\nenter the number of process:");scanf("%d",&np);printf("\nenter the size of blocks:");for(i=1;i<=nb;i++){printf("block no.%d:",i);scanf("%d",&b[i]);}printf("\nenter the size of process:-\n");for(i=1;i<=np;i++){scanf("%d",&p[i]);}for(i=1;i<=np;i++)
+{for(j=1;j<=nb;j++){if (barray[j]!=1){temp=b[j]-p[i];if (temp>=0)if (lowest>temp){parray[i]=j;lowest=temp;}}}fragment[i]=lowest;barray[parray[i]]=1;lowest=10000;}printf("\nprocess_no\tprocess_size\tblock_no\tblock_size\tfragment");for(i=1;i<=np && parray[i]!=0;i++)printf("\n%d\t\t%d\t\t%d\t\t%d\t\t%d",i,p[i],parray[i],b[parray[i]],fragment[i]);}
+
+
+worst fit
+
+ #include<stdio.h>  int main() {       int fragments[10], blocks[10], files[10];       int m, n, number_of_blocks, number_of_files, temp, top = 0;       static int block_arr[10], file_arr[10];       printf("\nEnter the Total Number of Blocks:\t");       scanf("%d",&number_of_blocks);       printf("Enter the Total Number of Files:\t");       scanf("%d",&number_of_files);printf("\nEnter the Size of the Blocks:\n");       for(m = 0; m < number_of_blocks; m++){printf("Block No.[%d]:\t", m + 1);             scanf("%d", &blocks[m]);}printf("Enter the Size of the Files:\n");for(m = 0; m < number_of_files; m++){printf("File No.[%d]:\t", m + 1); scanf("%d", &files[m]);}for(m = 0; m < number_of_files; m++){for(n = 0; n < number_of_blocks; n++){if(block_arr[n] != 1){temp = blocks[n] - files[m];if(temp >= 0){if(top < temp){file_arr[m] = n;top = temp;}}}fragments[m] =top;block_arr[file_arr[m]] = 1;top = 0;}}printf("\nFile Number\tFile Size\tBlock Number\tBlock Size\tFragment");for(m = 0; m < number_of_files; m++)   {printf("\n%d\t\t%d\t\t%d\t\t%d\t\t%d", m, files[m], file_arr[m], blocks[file_arr[m]], fragments[m]);}printf("\n");return 0; }
+
